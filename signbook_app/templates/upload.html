@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignBook Translator</title>
+</head>
+<body>
+    <h1>Upload a Document for Sign Language Translation</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".pdf,.docx" required>
+        <button type="submit">Upload and Translate</button>
+    </form>
+
+    {% if sentences %}
+        <h2>Translated Sentences (Gloss)</h2>
+        <ul>
+            {% for s in sentences %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
