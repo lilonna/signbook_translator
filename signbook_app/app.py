@@ -1,24 +1,31 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, request, render_template
 import os
-from main import extract_text  # your existing function
+import sys
+
+# Add parent directory to import path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from main import extract_text
 from clean_segment import clean_and_segment
 
-UPLOAD_FOLDER = 'uploads'
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/", methods=["GET", "POST"])
 def index():
-    segments = []
-    if request.method == 'POST':
-        file = request.files['file']
-        if file:
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(file_path)
-            raw_text = extract_text(file_path)
-            segments = clean_and_segment(raw_text)
-    return render_template('index.html', segments=segments)
+    sentences = None
+    if request.method == "POST":
+        uploaded_file = request.files["file"]
+        if uploaded_file:
+            # Go up one level to find 'samples/' directory
+            SAMPLES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "samples"))
+            os.makedirs(SAMPLES_DIR, exist_ok=True)
+
+            file_path = os.path.join(SAMPLES_DIR, uploaded_file.filename)
+            uploaded_file.save(file_path)
+
+            text = extract_text(file_path)
+            sentences = clean_and_segment(text)
+
+    return render_template("upload.html", sentences=sentences)
 
 if __name__ == "__main__":
     app.run(debug=True)
