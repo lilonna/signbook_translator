@@ -1,3 +1,5 @@
+
+#gloss_mapper.py
 import re
 
 def to_gloss(sentence):
@@ -5,7 +7,7 @@ def to_gloss(sentence):
     sentence = re.sub(r"\b(am|is|are|was|were|the|a|an|to|of|and|in|on|for|with|at|from|by|about)\b", "", sentence)
     sentence = re.sub(r"[^\w\s]", "", sentence)
     words = sentence.strip().split()
-    return " ".join(words).upper()
+    return [word.upper() for word in words]
 
 # Example usage
 if __name__ == "__main__":

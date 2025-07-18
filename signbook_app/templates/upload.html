@@ -4,19 +4,24 @@
     <title>SignBook Translator</title>
 </head>
 <body>
-    <h1>Upload a Document for Sign Language Translation</h1>
-    <form action="/" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".pdf,.docx" required>
-        <button type="submit">Upload and Translate</button>
+    <h1>📄ile</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit"> to Sign Language</button>
     </form>
 
     {% if sentences %}
-        <h2>Translated Sentences (Gloss)</h2>
+        <h2>🧠 Extracted Sentences:</h2>
         <ul>
             {% for s in sentences %}
                 <li>{{ s }}</li>
             {% endfor %}
         </ul>
+    {% endif %}
+
+    {% if sigml_url %}
+        <h2>🧍 Sign Language Animation:</h2>
+        <a href="{{ sigml_url }}" target="_blank">▶ Open Sign Avatar</a>
     {% endif %}
 </body>
 </html>

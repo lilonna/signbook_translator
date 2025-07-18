@@ -1,3 +1,4 @@
+#gloss_to_sigml.py
 def gloss_to_sigml(gloss_list):
     template = '''<sigml>
     <hns_sign gloss="{gloss}" />
