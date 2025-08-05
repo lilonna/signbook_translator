@@ -9,13 +9,4 @@ def to_gloss(sentence):
     words = sentence.strip().split()
     return [word.upper() for word in words]
 
-# Example usage
-if __name__ == "__main__":
-    sentences = [
-        "I am going to the school.",
-        "She is working on a project.",
-        "They went to the market!"
-    ]
-    for i, s in enumerate(sentences, 1):
-        gloss = to_gloss(s)
-        print(f"{i}: {gloss}")
+
