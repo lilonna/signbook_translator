@@ -39,16 +39,17 @@ def index():
             # Convert gloss to SiGML
             sigml_text = gloss_to_sigml(glosses)
 
-            # Save SiGML to static folder
+           
             SIGML_DIR = os.path.join(app.root_path, "static", "sigml")
             os.makedirs(SIGML_DIR, exist_ok=True)
             sigml_file_path = os.path.join(SIGML_DIR, "latest.sigml")
             with open(sigml_file_path, "w", encoding="utf-8") as f:
                 f.write(sigml_text)
 
-            # Public URL for web player
-            sigml_url = "/static/sigml/latest.sigml"
-            sigml_url = f"https://vhg.cmp.uea.ac.uk/tech/jas/std/?sigml_url={sigml_url}"
+            
+            sigml_file = "/static/sigml/latest.sigml"
+            sigml_url = f"https://vhg.cmp.uea.ac.uk/tech/jas/std/SiGML-Player-gui.html={sigml_file}"
+
 
     return render_template("upload.html", sentences=sentences, sigml_url=sigml_url)
 
